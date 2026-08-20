@@ -36,6 +36,7 @@ class ExperienceSection extends StatelessWidget {
                   border: Border.all(
                     color: isDark ? AppColors.borderDark : AppColors.borderLight,
                   ),
+                  boxShadow: isDark ? AppColors.cardShadowDark : AppColors.cardShadowLight,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

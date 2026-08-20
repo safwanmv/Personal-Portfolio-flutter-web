@@ -17,33 +17,49 @@ class ThemeToggle extends StatelessWidget {
       message: isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme',
       child: InkWell(
         onTap: onToggle,
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(24.0),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 7.0),
           decoration: BoxDecoration(
-            color: isDark ? AppColors.surfaceSubtleDark : AppColors.surfaceSubtleLight,
-            borderRadius: BorderRadius.circular(20.0),
+            color: isDark ? AppColors.surfaceSubtleDark : AppColors.badgeBgLight,
+            borderRadius: BorderRadius.circular(24.0),
             border: Border.all(
-              color: isDark ? AppColors.borderDark : AppColors.borderLight,
+              color: isDark
+                  ? AppColors.borderDark
+                  : AppColors.primaryLight.withValues(alpha: 0.15),
             ),
+            boxShadow: isDark
+                ? null
+                : [
+                    BoxShadow(
+                      color: AppColors.primaryLight.withValues(alpha: 0.08),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    )
+                  ],
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                isDark ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
-                size: 16.0,
-                color: isDark ? AppColors.primaryDark : AppColors.primaryLight,
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 200),
+                transitionBuilder: (child, anim) => ScaleTransition(scale: anim, child: child),
+                child: Icon(
+                  isDark ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
+                  key: ValueKey(isDark),
+                  size: 16.0,
+                  color: isDark ? AppColors.primaryDark : AppColors.primaryLight,
+                ),
               ),
               const SizedBox(width: 6.0),
               Text(
                 isDark ? 'Dark' : 'Light',
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w700,
                       color: isDark
-                          ? AppColors.textSecondaryDark
-                          : AppColors.textSecondaryLight,
+                          ? AppColors.textPrimaryDark
+                          : AppColors.badgeTextLight,
                     ),
               ),
             ],

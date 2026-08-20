@@ -43,10 +43,10 @@ class ProjectCard extends StatelessWidget {
       children: [
         // Category Pill
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 5.0),
           decoration: BoxDecoration(
             color: isDark ? AppColors.badgeBgDark : AppColors.badgeBgLight,
-            borderRadius: BorderRadius.circular(6.0),
+            borderRadius: BorderRadius.circular(16.0),
           ),
           child: Text(
             project.category.toUpperCase(),
@@ -71,7 +71,7 @@ class ProjectCard extends StatelessWidget {
                 color: (isDark
                         ? AppColors.confBadgeTextDark
                         : AppColors.confBadgeTextLight)
-                    .withOpacity(0.3),
+                    .withValues(alpha: 0.3),
               ),
             ),
             child: Row(
@@ -176,14 +176,16 @@ class ProjectCard extends StatelessWidget {
           runSpacing: 8.0,
           children: project.techStack.map((tech) {
             return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
               decoration: BoxDecoration(
                 color: isDark
                     ? AppColors.surfaceSubtleDark
-                    : AppColors.surfaceSubtleLight,
-                borderRadius: BorderRadius.circular(6.0),
+                    : AppColors.badgeBgLight,
+                borderRadius: BorderRadius.circular(16.0),
                 border: Border.all(
-                  color: isDark ? AppColors.borderDark : AppColors.borderLight,
+                  color: isDark
+                      ? AppColors.borderDark
+                      : AppColors.primaryLight.withValues(alpha: 0.15),
                 ),
               ),
               child: Text(
@@ -192,7 +194,7 @@ class ProjectCard extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   color: isDark
                       ? AppColors.textPrimaryDark
-                      : AppColors.textPrimaryLight,
+                      : AppColors.badgeTextLight,
                 ),
               ),
             );
@@ -214,6 +216,9 @@ class ProjectCard extends StatelessWidget {
               label: const Text('View Implementation Details'),
               style: OutlinedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
                 side: BorderSide(
                   color: isDark ? AppColors.borderDark : AppColors.borderLight,
                 ),
@@ -254,10 +259,11 @@ class ProjectCard extends StatelessWidget {
       padding: EdgeInsets.all(isMobile ? 20.0 : 32.0),
       decoration: BoxDecoration(
         color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
-        borderRadius: BorderRadius.circular(16.0),
+        borderRadius: BorderRadius.circular(20.0),
         border: Border.all(
           color: isDark ? AppColors.borderDark : AppColors.borderLight,
         ),
+        boxShadow: isDark ? AppColors.cardShadowDark : AppColors.cardShadowLight,
       ),
       child: isMobile
           ? Column(

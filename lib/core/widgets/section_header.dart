@@ -27,13 +27,14 @@ class SectionHeader extends StatelessWidget {
       children: [
         if (label != null) ...[
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),
+            padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 6.0),
             decoration: BoxDecoration(
               color: isDark ? AppColors.badgeBgDark : AppColors.badgeBgLight,
-              borderRadius: BorderRadius.circular(6.0),
+              borderRadius: BorderRadius.circular(20.0),
               border: Border.all(
-                color: (isDark ? AppColors.badgeTextDark : AppColors.badgeTextLight)
-                    .withOpacity(0.3),
+                color: isDark
+                    ? AppColors.badgeTextDark.withValues(alpha: 0.3)
+                    : AppColors.primaryLight.withValues(alpha: 0.2),
                 width: 1,
               ),
             ),

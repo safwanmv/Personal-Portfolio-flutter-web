@@ -30,7 +30,7 @@ class WorkSection extends StatelessWidget {
                   project: project,
                   index: index,
                 );
-              }).toList(),
+              }),
             ],
           ),
         ),

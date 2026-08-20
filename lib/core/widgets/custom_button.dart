@@ -93,24 +93,45 @@ class _CustomButtonState extends State<CustomButton> {
       ],
     );
 
+    BoxDecoration decoration = BoxDecoration(
+      color: bgColor,
+      borderRadius: BorderRadius.circular(10.0),
+      border: borderSide != BorderSide.none
+          ? Border.fromBorderSide(borderSide)
+          : null,
+      boxShadow: widget.variant == CustomButtonVariant.primary
+          ? [
+              BoxShadow(
+                color: isDark
+                    ? AppColors.primaryDark.withValues(alpha: _isHovered ? 0.35 : 0.2)
+                    : AppColors.primaryLight.withValues(alpha: _isHovered ? 0.35 : 0.2),
+                blurRadius: _isHovered ? 16 : 8,
+                offset: const Offset(0, 4),
+              )
+            ]
+          : null,
+    );
+
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        curve: Curves.easeInOut,
-        child: OutlinedButton(
-          onPressed: widget.onPressed,
-          style: OutlinedButton.styleFrom(
-            backgroundColor: bgColor,
-            side: borderSide,
-            padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 16.0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
+        duration: const Duration(milliseconds: 180),
+        curve: Curves.easeOutCubic,
+        transform: Matrix4.translationValues(0, _isHovered ? -2 : 0, 0),
+        decoration: decoration,
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: widget.onPressed,
+            borderRadius: BorderRadius.circular(10.0),
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 22.0, vertical: 14.0),
+              child: buttonChild,
             ),
           ),
-          child: buttonChild,
         ),
       ),
     );

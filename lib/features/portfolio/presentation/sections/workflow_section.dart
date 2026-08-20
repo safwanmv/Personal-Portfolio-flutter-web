@@ -86,6 +86,7 @@ class WorkflowSection extends StatelessWidget {
                                 ? AppColors.borderDark
                                 : AppColors.borderLight,
                           ),
+                          boxShadow: isDark ? AppColors.cardShadowDark : AppColors.cardShadowLight,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,8 +95,8 @@ class WorkflowSection extends StatelessWidget {
                               item['number']!,
                               style: theme.textTheme.displayMedium?.copyWith(
                                 color: isDark
-                                    ? AppColors.primaryDark.withOpacity(0.5)
-                                    : AppColors.primaryLight.withOpacity(0.4),
+                                    ? AppColors.primaryDark.withValues(alpha: 0.7)
+                                    : AppColors.primaryLight.withValues(alpha: 0.6),
                                 fontWeight: FontWeight.w900,
                               ),
                             ),
@@ -103,7 +104,10 @@ class WorkflowSection extends StatelessWidget {
                             Text(
                               item['title']!,
                               style: theme.textTheme.titleMedium?.copyWith(
-                                fontWeight: FontWeight.w700,
+                                fontWeight: FontWeight.w800,
+                                color: isDark
+                                    ? AppColors.textPrimaryDark
+                                    : AppColors.textPrimaryLight,
                               ),
                             ),
                             const SizedBox(height: 8.0),

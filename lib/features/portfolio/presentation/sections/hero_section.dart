@@ -24,34 +24,92 @@ class HeroSection extends StatelessWidget {
     final isMobile = Responsive.isMobile(context);
 
     return Container(
-      padding: Responsive.sectionPadding(context),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 1200),
-          child: isMobile
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildTextContent(context, isDark, isMobile),
-                    const SizedBox(height: 48.0),
-                    Center(child: _buildHeroVisual(context, isDark, isMobile)),
-                  ],
-                )
-              : Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 12,
-                      child: _buildTextContent(context, isDark, isMobile),
-                    ),
-                    const SizedBox(width: 48.0),
-                    Expanded(
-                      flex: 10,
-                      child: Center(child: _buildHeroVisual(context, isDark, isMobile)),
-                    ),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: isDark
+              ? [
+                  AppColors.bgDark,
+                  const Color(0xFF0D1322),
+                ]
+              : [
+                  const Color(0xFFF1F5F9).withValues(alpha: 0.5),
+                  AppColors.bgLight,
+                ],
+        ),
+      ),
+      child: Stack(
+        children: [
+          // Soft ambient radial glow mesh
+          Positioned(
+            right: -100,
+            top: -100,
+            child: Container(
+              width: 500,
+              height: 500,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    (isDark ? AppColors.primaryDark : AppColors.primaryLight)
+                        .withValues(alpha: isDark ? 0.12 : 0.08),
+                    Colors.transparent,
                   ],
                 ),
-        ),
+              ),
+            ),
+          ),
+          Positioned(
+            left: -150,
+            bottom: -150,
+            child: Container(
+              width: 600,
+              height: 600,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  colors: [
+                    (isDark ? AppColors.accentDark : AppColors.accentLight)
+                        .withValues(alpha: isDark ? 0.08 : 0.06),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Container(
+            padding: Responsive.sectionPadding(context),
+            child: Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1200),
+                child: isMobile
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildTextContent(context, isDark, isMobile),
+                          const SizedBox(height: 48.0),
+                          Center(child: _buildHeroVisual(context, isDark, isMobile)),
+                        ],
+                      )
+                    : Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            flex: 12,
+                            child: _buildTextContent(context, isDark, isMobile),
+                          ),
+                          const SizedBox(width: 48.0),
+                          Expanded(
+                            flex: 10,
+                            child: Center(child: _buildHeroVisual(context, isDark, isMobile)),
+                          ),
+                        ],
+                      ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

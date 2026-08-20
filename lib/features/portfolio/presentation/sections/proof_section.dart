@@ -55,17 +55,18 @@ class ProofSection extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final item = ProfileData.proofItems[index];
                       return Container(
-                        padding: const EdgeInsets.all(18.0),
+                        padding: const EdgeInsets.all(20.0),
                         decoration: BoxDecoration(
                           color: isDark
                               ? AppColors.surfaceDark
                               : AppColors.surfaceLight,
-                          borderRadius: BorderRadius.circular(12.0),
+                          borderRadius: BorderRadius.circular(16.0),
                           border: Border.all(
                             color: isDark
                                 ? AppColors.borderDark
                                 : AppColors.borderLight,
                           ),
+                          boxShadow: isDark ? AppColors.cardShadowDark : AppColors.cardShadowLight,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,6 +80,9 @@ class ProofSection extends StatelessWidget {
                                     item['title']!,
                                     style: theme.textTheme.titleSmall?.copyWith(
                                       fontWeight: FontWeight.w800,
+                                      color: isDark
+                                          ? AppColors.textPrimaryDark
+                                          : AppColors.textPrimaryLight,
                                     ),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -87,12 +91,12 @@ class ProofSection extends StatelessWidget {
                                 const SizedBox(width: 6.0),
                                 Container(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 6.0, vertical: 2.0),
+                                      horizontal: 8.0, vertical: 4.0),
                                   decoration: BoxDecoration(
                                     color: isDark
                                         ? AppColors.badgeBgDark
                                         : AppColors.badgeBgLight,
-                                    borderRadius: BorderRadius.circular(4.0),
+                                    borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Text(
                                     item['tag']!,
@@ -100,7 +104,7 @@ class ProofSection extends StatelessWidget {
                                       color: isDark
                                           ? AppColors.badgeTextDark
                                           : AppColors.badgeTextLight,
-                                      fontSize: 10.0,
+                                      fontSize: 11.0,
                                       fontWeight: FontWeight.w700,
                                     ),
                                   ),

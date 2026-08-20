@@ -60,6 +60,7 @@ class SkillsSection extends StatelessWidget {
                                 ? AppColors.borderDark
                                 : AppColors.borderLight,
                           ),
+                          boxShadow: isDark ? AppColors.cardShadowDark : AppColors.cardShadowLight,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,6 +89,9 @@ class SkillsSection extends StatelessWidget {
                                     category.title,
                                     style: theme.textTheme.titleMedium?.copyWith(
                                       fontWeight: FontWeight.w700,
+                                      color: isDark
+                                          ? AppColors.textPrimaryDark
+                                          : AppColors.textPrimaryLight,
                                     ),
                                   ),
                                 ),
@@ -102,16 +106,16 @@ class SkillsSection extends StatelessWidget {
                                   children: category.skills.map((skill) {
                                     return Container(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 10.0, vertical: 5.0),
+                                          horizontal: 12.0, vertical: 6.0),
                                       decoration: BoxDecoration(
                                         color: isDark
                                             ? AppColors.surfaceSubtleDark
-                                            : AppColors.surfaceSubtleLight,
-                                        borderRadius: BorderRadius.circular(6.0),
+                                            : AppColors.badgeBgLight,
+                                        borderRadius: BorderRadius.circular(16.0),
                                         border: Border.all(
                                           color: isDark
                                               ? AppColors.borderDark
-                                              : AppColors.borderLight,
+                                              : AppColors.primaryLight.withValues(alpha: 0.15),
                                         ),
                                       ),
                                       child: Text(
@@ -120,8 +124,8 @@ class SkillsSection extends StatelessWidget {
                                             theme.textTheme.labelMedium?.copyWith(
                                           fontWeight: FontWeight.w600,
                                           color: isDark
-                                              ? AppColors.textSecondaryDark
-                                              : AppColors.textSecondaryLight,
+                                              ? AppColors.textPrimaryDark
+                                              : AppColors.badgeTextLight,
                                         ),
                                       ),
                                     );

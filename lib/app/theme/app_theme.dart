@@ -14,7 +14,7 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.bgLight,
       colorScheme: const ColorScheme.light(
         primary: AppColors.primaryLight,
-        secondary: AppColors.primaryHoverLight,
+        secondary: AppColors.accentLight,
         surface: AppColors.surfaceLight,
         onSurface: AppColors.textPrimaryLight,
       ),
@@ -56,8 +56,21 @@ class AppTheme {
         color: AppColors.surfaceLight,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(16.0),
           side: const BorderSide(color: AppColors.borderLight, width: 1.0),
+        ),
+      ),
+      chipTheme: ChipThemeData(
+        backgroundColor: AppColors.badgeBgLight,
+        labelStyle: TextStyle(
+          color: AppColors.badgeTextLight,
+          fontWeight: FontWeight.w600,
+          fontSize: 12,
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide.none,
         ),
       ),
       dividerTheme: const DividerThemeData(
@@ -76,7 +89,7 @@ class AppTheme {
       scaffoldBackgroundColor: AppColors.bgDark,
       colorScheme: const ColorScheme.dark(
         primary: AppColors.primaryDark,
-        secondary: AppColors.primaryHoverDark,
+        secondary: AppColors.accentDark,
         surface: AppColors.surfaceDark,
         onSurface: AppColors.textPrimaryDark,
       ),
@@ -118,8 +131,21 @@ class AppTheme {
         color: AppColors.surfaceDark,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(16.0),
           side: const BorderSide(color: AppColors.borderDark, width: 1.0),
+        ),
+      ),
+      chipTheme: ChipThemeData(
+        backgroundColor: AppColors.badgeBgDark,
+        labelStyle: TextStyle(
+          color: AppColors.badgeTextDark,
+          fontWeight: FontWeight.w600,
+          fontSize: 12,
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+          side: BorderSide.none,
         ),
       ),
       dividerTheme: const DividerThemeData(
