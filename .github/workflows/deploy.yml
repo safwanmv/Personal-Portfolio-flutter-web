@@ -1,0 +1,65 @@
+name: Deploy Flutter Web to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+# Permissions required to publish to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment to prevent race conditions
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Download your project code from GitHub
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Java environment (needed by Flutter toolchain)
+      - name: Setup Java Environment
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # Step 3: Set up Flutter SDK on the GitHub runner
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      # Step 4: Download Flutter pub packages
+      - name: Install Pub Dependencies
+        run: flutter pub get
+
+      # Step 5: Build Flutter Web release bundle with the base URL path
+      - name: Build Flutter Web Release
+        run: flutter build web --release --base-href "/Personal-Portfolio-flutter-web/"
+
+      # Step 6: Configure GitHub Pages deployment settings
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+
+      # Step 7: Package the build/web directory as a deployment artifact
+      - name: Upload Web Build Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'build/web'
+
+      # Step 8: Publish the website to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
